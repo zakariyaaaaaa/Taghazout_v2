@@ -1,4 +1,4 @@
-<img width="1536" height="1024" alt="MCD" src="https://github.com/user-attachments/assets/537d04f1-78b2-4aea-8d30-3d48aae9c64e" /># 🏄 Taghazout v2 — Plateforme de Réservation Touristique
+# 🏄 Taghazout v2 — Plateforme de Réservation Touristique
 
 ![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?logo=mariadb&logoColor=white)
@@ -210,8 +210,8 @@ Pour tester un paiement :
 
 | Champ | Valeur |
 |-------|--------|
-| Email | test@test.com |
-| Mot de passe | 12345678 |
+| Email | admin@taghazout.com |
+| Mot de passe | *(défini lors de l'installation)* |
 
 ---
 
