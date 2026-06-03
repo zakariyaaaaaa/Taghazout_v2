@@ -211,7 +211,7 @@ Pour tester un paiement :
 | Champ | Valeur |
 |-------|--------|
 | Email | admin@taghazout.com |
-| Mot de passe | *(défini lors de l'installation)* |
+| Mot de passe | *(12345678)* |
 
 ---
 
