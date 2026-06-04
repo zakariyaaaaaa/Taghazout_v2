@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Taghazout v2 — Présentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabinet+Grotesk:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ocean: #0a4f8c;
+    --wave: #1a7fd4;
+    --sky: #5bb8f5;
+    --foam: #e8f4fd;
+    --sand: #f5e6c8;
+    --sand-dark: #d4a96a;
+    --night: #05111f;
+    --text: #0d1f2d;
+    --white: #ffffff;
+    --accent: #ff6b35;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    background: var(--night);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--sky);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1.5px solid rgba(91,184,245,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+  }
+
+  /* OCEAN WAVE BACKGROUND */
+  .ocean-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .ocean-bg::before {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 120%;
+    height: 60%;
+    background: radial-gradient(ellipse at 50% 100%, rgba(10,79,140,0.25) 0%, transparent 70%);
+    animation: breathe 8s ease-in-out infinite;
+  }
+  .ocean-bg::after {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(ellipse, rgba(26,127,212,0.08) 0%, transparent 70%);
+    animation: breathe 12s ease-in-out infinite reverse;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1) translateY(0); opacity: 0.6; }
+    50% { transform: scale(1.05) translateY(-10px); opacity: 1; }
+  }
+
+  /* NOISE TEXTURE */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(5,17,31,0.9), transparent);
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 4px;
+    color: var(--sky);
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sky); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    overflow: hidden;
+  }
+
+  .hero-wave {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    overflow: hidden;
+  }
+  .hero-wave svg { display: block; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border: 1px solid rgba(91,184,245,0.3);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sky);
+    background: rgba(91,184,245,0.08);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--sky);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.9;
+    letter-spacing: 4px;
+    animation: fadeUp 0.9s 0.1s ease both;
+    position: relative;
+  }
+  .hero-title .line-1 { display: block; color: var(--white); }
+  .hero-title .line-2 {
+    display: block;
+    background: linear-gradient(135deg, var(--wave), var(--sky), #a8dff5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: rgba(255,255,255,0.55);
+    margin: 24px 0 48px;
+    max-width: 560px;
+    line-height: 1.5;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    animation: fadeUp 1s 0.3s ease both;
+    margin-bottom: 60px;
+  }
+  .badge {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .badge-php { background: rgba(119,107,180,0.2); color: #b8aaff; border: 1px solid rgba(119,107,180,0.3); }
+  .badge-db { background: rgba(0,53,69,0.4); color: #5dd9c1; border: 1px solid rgba(93,217,193,0.3); }
+  .badge-stripe { background: rgba(99,91,255,0.15); color: #a8a2ff; border: 1px solid rgba(99,91,255,0.3); }
+  .badge-mit { background: rgba(34,197,94,0.1); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+
+  .hero-scroll {
+    animation: fadeUp 1s 0.5s ease both, bounce 2s 1.5s infinite;
+    color: rgba(255,255,255,0.3);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-scroll::after {
+    content: '';
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(91,184,245,0.5), transparent);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 100px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 6vw, 80px);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .section-subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 64px;
+    max-width: 500px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .divider svg { display: block; }
+
+  /* FEATURES GRID */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .feature-card {
+    padding: 40px 36px;
+    background: rgba(5,17,31,0.6);
+    transition: background 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--sky), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feature-card:hover { background: rgba(26,127,212,0.06); }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .feature-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+  .feature-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  /* TECH STACK */
+  .tech-section {
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+  .tech-item {
+    padding: 28px 24px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    text-align: center;
+    background: rgba(10,79,140,0.08);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .tech-item:hover {
+    border-color: rgba(91,184,245,0.3);
+    background: rgba(91,184,245,0.05);
+    transform: translateY(-4px);
+  }
+  .tech-emoji { font-size: 32px; display: block; margin-bottom: 12px; }
+  .tech-name { font-size: 15px; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+  .tech-role { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+  /* DATABASE TABLE */
+  .db-section { }
+  .db-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  @media(max-width:768px) { .db-visual { grid-template-columns: 1fr; } }
+
+  .db-category {
+    background: rgba(10,79,140,0.1);
+    border: 1px solid rgba(26,127,212,0.15);
+    border-radius: 20px;
+    padding: 32px;
+  }
+  .db-category-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(91,184,245,0.15);
+  }
+  .db-table-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: padding-left 0.2s;
+  }
+  .db-table-row:hover { padding-left: 6px; }
+  .db-table-row:last-child { border-bottom: none; }
+  .db-table-icon { font-size: 18px; width: 28px; text-align: center; }
+  .db-table-name { font-size: 14px; font-weight: 700; color: var(--foam); }
+  .db-table-desc { font-size: 12px; color: rgba(255,255,255,0.35); margin-left: auto; }
+
+  /* STRUCTURE */
+  .structure-section {}
+  .file-tree {
+    background: rgba(5,17,31,0.8);
+    border: 1px solid rgba(26,127,212,0.2);
+    border-radius: 20px;
+    padding: 36px 40px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 2;
+    overflow-x: auto;
+  }
+  .tree-folder { color: var(--sky); font-weight: bold; }
+  .tree-file { color: rgba(255,255,255,0.55); }
+  .tree-comment { color: rgba(91,184,245,0.4); }
+  .tree-root { color: var(--sand-dark); font-weight: bold; font-size: 16px; }
+
+  /* INSTALLATION */
+  .install-section {}
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .step-card {
+    background: rgba(5,17,31,0.7);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .step-card:hover { border-color: rgba(91,184,245,0.25); }
+  .step-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 1;
+    color: rgba(91,184,245,0.08);
+    position: absolute;
+    top: 16px; right: 24px;
+    pointer-events: none;
+  }
+  .step-emoji { font-size: 28px; margin-bottom: 16px; display: block; }
+  .step-title { font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+  .code-block {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #7dd3fc;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .code-block .comment { color: rgba(255,255,255,0.25); }
+  .code-block .key { color: #a78bfa; }
+  .code-block .val { color: #86efac; }
+
+  /* STRIPE */
+  .stripe-section {}
+  .stripe-card {
+    background: linear-gradient(135deg, rgba(99,91,255,0.12), rgba(10,79,140,0.2));
+    border: 1px solid rgba(99,91,255,0.2);
+    border-radius: 24px;
+    padding: 56px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+  .stripe-card-visual {
+    flex: 0 0 auto;
+    width: 320px;
+    height: 190px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    border-radius: 18px;
+    padding: 28px 30px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .card-chip {
+    width: 42px; height: 32px;
+    background: linear-gradient(135deg, #d4a017, #f5c842);
+    border-radius: 6px;
+    margin-bottom: 30px;
+  }
+  .card-number {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 16px;
+  }
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .card-brand {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+  }
+  .stripe-info { flex: 1; min-width: 250px; }
+  .stripe-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .stripe-info p { color: rgba(255,255,255,0.45); font-size: 15px; line-height: 1.7; margin-bottom: 24px; }
+  .stripe-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #4ade80;
+  }
+
+  /* ROADMAP */
+  .roadmap-section {}
+  .roadmap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 32px;
+  }
+  .roadmap-list::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 12px; bottom: 12px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--wave), rgba(91,184,245,0.1));
+  }
+  .roadmap-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+    transition: padding-left 0.2s;
+  }
+  .roadmap-item:hover { padding-left: 6px; }
+  .roadmap-item:last-child { border-bottom: none; }
+  .roadmap-dot {
+    position: absolute;
+    left: -28px;
+    top: 34px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--wave);
+    background: var(--night);
+    flex-shrink: 0;
+  }
+  .roadmap-dot.done { background: var(--wave); border-color: var(--sky); }
+  .roadmap-version {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.2);
+    width: 80px;
+    flex-shrink: 0;
+  }
+  .roadmap-version.done { color: var(--sky); }
+  .roadmap-content { flex: 1; }
+  .roadmap-title { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+  .roadmap-items-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .roadmap-tag {
+    padding: 4px 12px;
+    background: rgba(91,184,245,0.08);
+    border: 1px solid rgba(91,184,245,0.15);
+    border-radius: 100px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .roadmap-tag.done { background: rgba(26,127,212,0.15); color: var(--sky); border-color: rgba(91,184,245,0.25); }
+  .roadmap-status {
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .status-done { background: rgba(34,197,94,0.1); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+  .status-soon { background: rgba(245,158,11,0.1); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+  .status-future { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.07); }
+
+  /* AUTHOR */
+  .author-section {
+    text-align: center;
+    padding-bottom: 120px;
+  }
+  .author-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 56px 80px;
+    background: rgba(10,79,140,0.08);
+    border: 1px solid rgba(26,127,212,0.15);
+    border-radius: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .author-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--wave), var(--sky), var(--wave), transparent);
+  }
+  .author-avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ocean), var(--wave));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    border: 3px solid rgba(91,184,245,0.3);
+    box-shadow: 0 0 0 6px rgba(91,184,245,0.06);
+  }
+  .author-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 4px;
+    color: var(--white);
+  }
+  .author-desc {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: rgba(255,255,255,0.4);
+    font-size: 16px;
+  }
+  .author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: rgba(91,184,245,0.1);
+    border: 1px solid rgba(91,184,245,0.25);
+    border-radius: 100px;
+    color: var(--sky);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+  .author-link:hover {
+    background: rgba(91,184,245,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(91,184,245,0.15);
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.2);
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  footer span { color: var(--sky); }
+
+  /* FULLWIDTH SECTIONS */
+  .full-section {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .full-section > * {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  /* WAVE DIVIDERS */
+  .wave-divider {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    height: 80px;
+    background: transparent;
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media(max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .stripe-card { padding: 32px 24px; }
+    .stripe-card-visual { width: 100%; }
+    .author-card { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="ocean-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">TAGHAZOUT</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#database">Database</a></li>
+    <li><a href="#install">Install</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🌊 Taghazout · Maroc 🇲🇦 · Plateforme Touristique</div>
+  <h1 class="hero-title">
+    <span class="line-1">TAGHA</span>
+    <span class="line-2">ZOUT</span>
+  </h1>
+  <p class="hero-subtitle">Où l'Atlantique rencontre le digital — une expérience touristique entièrement réinventée.</p>
+  <div class="hero-badges">
+    <span class="badge badge-php">⚡ PHP 8.2</span>
+    <span class="badge badge-db">🗄️ MariaDB 10.4</span>
+    <span class="badge badge-stripe">💳 Stripe Payments</span>
+    <span class="badge badge-mit">✅ MIT License</span>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" height="80" width="100%">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="rgba(10,79,140,0.12)"/>
+      <path d="M0,55 C480,20 960,70 1440,55 L1440,80 L0,80 Z" fill="rgba(5,17,31,0.8)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label reveal">✦ Fonctionnalités</div>
+  <h2 class="section-title reveal">Tout en<br/>un seul endroit.</h2>
+  <p class="section-subtitle reveal">Une plateforme complète pour les visiteurs et les administrateurs.</p>
+  <div class="features-grid reveal">
+    <div class="feature-card">
+      <span class="feature-icon">🏨</span>
+      <div class="feature-title">Réservation d'Hôtels</div>
+      <div class="feature-desc">Parcourez et réservez les meilleurs hébergements de Taghazout. Disponibilités en temps réel.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🏄</span>
+      <div class="feature-title">Cours de Surf</div>
+      <div class="feature-desc">Réservez vos sessions de surf avec les meilleurs instructeurs locaux. Planning interactif.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🍽️</span>
+      <div class="feature-title">Restaurants</div>
+      <div class="feature-desc">Découvrez la gastronomie locale. Réservez votre table en quelques clics.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🎯</span>
+      <div class="feature-title">Activités Touristiques</div>
+      <div class="feature-desc">Excursions, randonnées, plongée... Tout le catalogue des activités de la région.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💳</span>
+      <div class="feature-title">Paiement Sécurisé</div>
+      <div class="feature-desc">Stripe Checkout intégré. Transactions 100% sécurisées. Historique complet.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🎁</span>
+      <div class="feature-title">Programme Fidélité</div>
+      <div class="feature-desc">Gagnez des points à chaque réservation. Échangez-les contre des récompenses exclusives.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔔</span>
+      <div class="feature-title">Notifications Temps Réel</div>
+      <div class="feature-desc">Confirmations, rappels, offres spéciales. Restez informé à chaque étape.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💬</span>
+      <div class="feature-title">Messagerie Interne</div>
+      <div class="feature-desc">Communiquez directement avec les prestataires. Système de chat intégré.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🌙</span>
+      <div class="feature-title">Dark / Light Mode</div>
+      <div class="feature-desc">Interface adaptée à chaque préférence. Confort visuel garanti jour et nuit.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="stack" style="background: rgba(255,255,255,0.015); border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); max-width:100%; padding-left:0; padding-right:0;">
+  <div style="max-width:1400px; margin:0 auto; padding:100px 60px;">
+    <div class="section-label reveal">✦ Stack Technique</div>
+    <h2 class="section-title reveal">Technologies<br/>utilisées.</h2>
+    <p class="section-subtitle reveal">Un stack solide, éprouvé et performant.</p>
+    <div class="tech-grid reveal">
+      <div class="tech-item">
+        <span class="tech-emoji">🐘</span>
+        <div class="tech-name">PHP 8.2</div>
+        <div class="tech-role">Backend</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-emoji">🗄️</span>
+        <div class="tech-name">MariaDB</div>
+        <div class="tech-role">Base de données</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-emoji">💳</span>
+        <div class="tech-name">Stripe API</div>
+        <div class="tech-role">Paiements</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-emoji">📊</span>
+        <div class="tech-name">Chart.js</div>
+        <div class="tech-role">Dashboard</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-emoji">🎨</span>
+        <div class="tech-name">CSS3</div>
+        <div class="tech-role">Interface</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-emoji">⚡</span>
+        <div class="tech-name">JavaScript</div>
+        <div class="tech-role">Interactivité</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-emoji">🔤</span>
+        <div class="tech-name">DM Sans</div>
+        <div class="tech-role">Typographie</div>
+      </div>
+      <div class="tech-item">
+        <span class="tech-emoji">📦</span>
+        <div class="tech-name">Composer</div>
+        <div class="tech-role">Dépendances</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATABASE -->
+<section id="database">
+  <div class="section-label reveal">✦ Base de Données</div>
+  <h2 class="section-title reveal">Architecture<br/>des données.</h2>
+  <p class="section-subtitle reveal">MariaDB 10.4 · 17 tables · Encodage UTF-8</p>
+  <div class="db-visual reveal">
+    <div class="db-category">
+      <div class="db-category-title">🧩 Core — Services</div>
+      <div class="db-table-row"><span class="db-table-icon">👥</span><span class="db-table-name">users</span><span class="db-table-desc">Comptes utilisateurs</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🏨</span><span class="db-table-name">hotels</span><span class="db-table-desc">Hébergements</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🏄</span><span class="db-table-name">surf_courses</span><span class="db-table-desc">Cours de surf</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🎯</span><span class="db-table-name">activities</span><span class="db-table-desc">Activités</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🍽️</span><span class="db-table-name">restaurants</span><span class="db-table-desc">Restaurants</span></div>
+      <div class="db-table-row"><span class="db-table-icon">📅</span><span class="db-table-name">bookings</span><span class="db-table-desc">Réservations</span></div>
+      <div class="db-table-row"><span class="db-table-icon">💳</span><span class="db-table-name">payments</span><span class="db-table-desc">Transactions Stripe</span></div>
+      <div class="db-table-row"><span class="db-table-icon">⭐</span><span class="db-table-name">reviews</span><span class="db-table-desc">Avis & notes</span></div>
+      <div class="db-table-row"><span class="db-table-icon">❤️</span><span class="db-table-name">favorites</span><span class="db-table-desc">Favoris</span></div>
+    </div>
+    <div class="db-category">
+      <div class="db-category-title">⚙️ Features — Système</div>
+      <div class="db-table-row"><span class="db-table-icon">💬</span><span class="db-table-name">messages</span><span class="db-table-desc">Messagerie interne</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🔔</span><span class="db-table-name">notifications</span><span class="db-table-desc">Système de notifs</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🎁</span><span class="db-table-name">loyalty_rewards</span><span class="db-table-desc">Catalogue récompenses</span></div>
+      <div class="db-table-row"><span class="db-table-icon">📜</span><span class="db-table-name">loyalty_history</span><span class="db-table-desc">Historique points</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🎫</span><span class="db-table-name">loyalty_redemptions</span><span class="db-table-desc">Utilisation rewards</span></div>
+      <div class="db-table-row"><span class="db-table-icon">📣</span><span class="db-table-name">events</span><span class="db-table-desc">Événements</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🖼️</span><span class="db-table-name">gallery</span><span class="db-table-desc">Galerie photos</span></div>
+      <div class="db-table-row"><span class="db-table-icon">🤖</span><span class="db-table-name">service_ia</span><span class="db-table-desc">Services IA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section>
+  <div class="section-label reveal">✦ Structure</div>
+  <h2 class="section-title reveal">Arborescence<br/>du projet.</h2>
+  <div class="file-tree reveal">
+<span class="tree-root">📁 Taghazout_v2/</span>
+├── <span class="tree-folder">📂 admin/</span>               <span class="tree-comment"># Panel administrateur</span>
+│   ├── <span class="tree-file">dashboard.php</span>
+│   ├── <span class="tree-folder">users/</span>  <span class="tree-folder">bookings/</span>  <span class="tree-folder">payments/</span>
+│   └── <span class="tree-folder">hotels/</span>  <span class="tree-folder">activities/</span>  <span class="tree-folder">surf/</span>
+│
+├── <span class="tree-folder">📂 auth/</span>                <span class="tree-comment"># Authentification</span>
+│   ├── <span class="tree-file">login.php</span>  <span class="tree-file">register.php</span>  <span class="tree-file">logout.php</span>
+│
+├── <span class="tree-folder">📂 booking/</span>             <span class="tree-comment"># Réservations</span>
+│   ├── <span class="tree-file">hotels.php</span>  <span class="tree-file">activities.php</span>
+│   └── <span class="tree-file">surf.php</span>  <span class="tree-file">restaurants.php</span>
+│
+├── <span class="tree-folder">📂 payment/</span>             <span class="tree-comment"># Stripe Integration</span>
+│   ├── <span class="tree-file">checkout.php</span>  <span class="tree-file">webhook.php</span>
+│
+├── <span class="tree-folder">📂 includes/</span>            <span class="tree-comment"># Composants partagés</span>
+│   ├── <span class="tree-file">db.php</span>  <span class="tree-file">header.php</span>  <span class="tree-file">footer.php</span>
+│
+├── <span class="tree-folder">📂 assets/</span>              <span class="tree-comment"># Ressources statiques</span>
+│   ├── <span class="tree-folder">css/</span>  <span class="tree-folder">js/</span>  <span class="tree-folder">img/</span>
+│
+├── <span class="tree-folder">📂 database/</span>            <span class="tree-comment"># Scripts SQL</span>
+│   └── <span class="tree-file">taghazout.sql</span>
+│
+├── <span class="tree-folder">📂 diagrams/</span>            <span class="tree-comment"># MCD & MLD</span>
+│   ├── <span class="tree-file">MCD.png</span>  <span class="tree-file">MLD.png</span>
+│
+└── <span class="tree-file">index.php</span>               <span class="tree-comment"># Point d'entrée</span>
+  </div>
+</section>
+
+<!-- INSTALLATION -->
+<section id="install">
+  <div class="section-label reveal">✦ Installation</div>
+  <h2 class="section-title reveal">Lancer le projet<br/>en 5 étapes.</h2>
+  <p class="section-subtitle reveal">Prérequis : PHP 8.2+ · MariaDB 10.4+ · Composer · Compte Stripe</p>
+  <div class="steps-grid reveal">
+    <div class="step-card">
+      <div class="step-number">01</div>
+      <span class="step-emoji">📥</span>
+      <div class="step-title">Cloner le repo</div>
+      <div class="code-block">git clone https://github.com/<br/>zakariyaaaaaa/Taghazout_v2.git<br/>cd Taghazout_v2</div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">02</div>
+      <span class="step-emoji">📦</span>
+      <div class="step-title">Installer les dépendances</div>
+      <div class="code-block">composer install</div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">03</div>
+      <span class="step-emoji">⚙️</span>
+      <div class="step-title">Configurer .env</div>
+      <div class="code-block"><span class="key">DB_HOST</span>=<span class="val">localhost</span><br/><span class="key">DB_NAME</span>=<span class="val">taghazout</span><br/><span class="key">STRIPE_KEY</span>=<span class="val">sk_test_...</span></div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">04</div>
+      <span class="step-emoji">🗄️</span>
+      <div class="step-title">Importer la base</div>
+      <div class="code-block">mysql -u root -p taghazout<br/>  &lt; database/taghazout.sql</div>
+    </div>
+    <div class="step-card">
+      <div class="step-number">05</div>
+      <span class="step-emoji">🚀</span>
+      <div class="step-title">Démarrer le serveur</div>
+      <div class="code-block">php -S localhost:3000<br/><br/><span class="comment"># → http://localhost:3000</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIPE -->
+<section style="max-width:100%; padding:0;">
+  <div style="max-width:1400px; margin:0 auto; padding:0 60px 100px;">
+    <div class="section-label reveal">✦ Paiement</div>
+    <h2 class="section-title reveal">Stripe Checkout<br/>intégré.</h2>
+    <div class="stripe-card reveal">
+      <div class="stripe-card-visual">
+        <div class="card-chip"></div>
+        <div class="card-number">4242 4242 4242 4242</div>
+        <div class="card-meta">
+          <div><div style="margin-bottom:2px">Expiry</div><div style="color:rgba(255,255,255,0.7)">12/99</div></div>
+          <div><div style="margin-bottom:2px">CVC</div><div style="color:rgba(255,255,255,0.7)">123</div></div>
+        </div>
+        <div class="card-brand">TEST</div>
+      </div>
+      <div class="stripe-info">
+        <h3>Paiements<br/>Sécurisés</h3>
+        <p>Stripe Checkout garantit des transactions 100% sécurisées. En mode test, utilisez la carte ci-contre. Aucun argent réel n'est débité.</p>
+        <div class="stripe-note">✅ Mode test · Aucune facturation réelle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" style="background: rgba(255,255,255,0.015); border-top:1px solid rgba(255,255,255,0.04); max-width:100%; padding:0;">
+  <div style="max-width:1400px; margin:0 auto; padding:100px 60px;">
+    <div class="section-label reveal">✦ Roadmap</div>
+    <h2 class="section-title reveal">Ce qui vient<br/>ensuite.</h2>
+    <div class="roadmap-list reveal">
+      <div class="roadmap-item">
+        <div class="roadmap-dot done"></div>
+        <div class="roadmap-version done">v2.0</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Plateforme Complète — Actuelle</div>
+          <div class="roadmap-items-list">
+            <span class="roadmap-tag done">Auth</span>
+            <span class="roadmap-tag done">Réservations</span>
+            <span class="roadmap-tag done">Stripe</span>
+            <span class="roadmap-tag done">Dashboard Admin</span>
+            <span class="roadmap-tag done">Fidélité</span>
+            <span class="roadmap-tag done">Dark Mode</span>
+          </div>
+        </div>
+        <div class="roadmap-status status-done">✅ Live</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-version">v2.1</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Application Mobile</div>
+          <div class="roadmap-items-list">
+            <span class="roadmap-tag">Android</span>
+            <span class="roadmap-tag">iOS</span>
+            <span class="roadmap-tag">React Native</span>
+          </div>
+        </div>
+        <div class="roadmap-status status-soon">🔜 Bientôt</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-version">v2.2</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Géolocalisation & Cartographie</div>
+          <div class="roadmap-items-list">
+            <span class="roadmap-tag">Maps interactives</span>
+            <span class="roadmap-tag">GPS temps réel</span>
+          </div>
+        </div>
+        <div class="roadmap-status status-soon">🔜 Bientôt</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-version">v2.3</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Intelligence Artificielle</div>
+          <div class="roadmap-items-list">
+            <span class="roadmap-tag">Recommandations</span>
+            <span class="roadmap-tag">Chatbot</span>
+            <span class="roadmap-tag">Prédictions</span>
+          </div>
+        </div>
+        <div class="roadmap-status status-future">📅 Futur</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-version">v3.0</div>
+        <div class="roadmap-content">
+          <div class="roadmap-title">Support Multilingue & Chat Live</div>
+          <div class="roadmap-items-list">
+            <span class="roadmap-tag">AR · FR · EN · ES</span>
+            <span class="roadmap-tag">Live Support</span>
+          </div>
+        </div>
+        <div class="roadmap-status status-future">📅 Futur</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHOR -->
+<section class="author-section">
+  <div class="section-label reveal" style="text-align:center">✦ Auteur</div>
+  <h2 class="section-title reveal" style="text-align:center">Built with ❤️<br/>from Morocco.</h2>
+  <br/><br/>
+  <div class="reveal" style="display:flex; justify-content:center;">
+    <div class="author-card">
+      <div class="author-avatar">ZK</div>
+      <div class="author-name">ZAKARIYA</div>
+      <div class="author-desc">Full Stack Developer · PHP / MariaDB</div>
+      <div style="color:rgba(255,255,255,0.2); font-size:13px; letter-spacing:1px;">
+        Digitalisation du tourisme à Taghazout 🌊
+      </div>
+      <a href="https://github.com/zakariyaaaaaa" class="author-link" target="_blank">
+        ⬡ github.com/zakariyaaaaaa
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>🌊 <span>TAGHAZOUT V2</span> · Made with ❤️ in Morocco · MIT License</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px';
+      cursor.style.height = '20px';
+      cursor.style.background = '#a8dff5';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px';
+      cursor.style.height = '12px';
+      cursor.style.background = 'var(--sky)';
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
