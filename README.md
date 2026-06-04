@@ -1,94 +1,164 @@
 # 🏄 Taghazout v2 — Plateforme de Réservation Touristique
 
-![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)
-![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?logo=mariadb&logoColor=white)
-![Stripe](https://img.shields.io/badge/Stripe-Payment-635BFF?logo=stripe&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php\&logoColor=white)
+![MariaDB](https://img.shields.io/badge/MariaDB-10.4-003545?logo=mariadb\&logoColor=white)
+![Stripe](https://img.shields.io/badge/Stripe-Payment-635BFF?logo=stripe\&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
-Taghazout v2 est une plateforme web complète de réservation touristique dédiée à la ville de **Taghazout**, Maroc. Elle permet aux visiteurs de réserver des hôtels, activités, cours de surf et restaurants, avec un système de paiement intégré via Stripe.
+Taghazout v2 est une plateforme web complète de réservation touristique dédiée à la ville de **Taghazout**, Maroc. Elle permet aux visiteurs de réserver des hôtels, activités, cours de surf et restaurants à travers une interface moderne et intuitive, avec un système de paiement sécurisé intégré via Stripe.
+
+---
+
+## 🌍 Présentation du Projet
+
+Taghazout v2 a été développé dans le but de digitaliser les services touristiques de la région de Taghazout et de faciliter l'accès aux différentes offres disponibles.
+
+La plateforme centralise plusieurs services :
+
+* Réservation d'hôtels
+* Réservation d'activités touristiques
+* Réservation de cours de surf
+* Réservation de restaurants
+* Gestion des paiements en ligne
+* Programme de fidélité
+* Système de messagerie
+* Gestion administrative complète
+
+L'objectif principal est d'offrir une expérience utilisateur simple, rapide et efficace.
 
 ---
 
 ## ✨ Fonctionnalités
 
 ### 👤 Côté Utilisateur
-- Inscription / Connexion sécurisée
-- Recherche et réservation d'hôtels, activités, cours de surf et restaurants
-- Paiement en ligne via **Stripe**
-- Historique des réservations
-- Système de points de fidélité
-- Avis et commentaires
-- Messagerie interne
-- Notifications en temps réel
-- Mode sombre / clair
 
-### 🛠️ Côté Admin
-- Dashboard avec statistiques en temps réel
-- Gestion des utilisateurs (CRUD)
-- Gestion des réservations et paiements
-- Gestion du contenu (hôtels, activités, surf, restaurants)
-- Modération des avis
-- Messagerie admin
+* Inscription / Connexion sécurisée
+* Gestion du profil utilisateur
+* Recherche avancée
+* Réservation d'hôtels
+* Réservation d'activités
+* Réservation de cours de surf
+* Réservation de restaurants
+* Paiement sécurisé via Stripe
+* Historique des réservations
+* Gestion des favoris
+* Système de fidélité
+* Avis et commentaires
+* Notifications en temps réel
+* Messagerie interne
+* Mode sombre / clair
+
+### 🛠️ Côté Administrateur
+
+* Dashboard interactif
+* Gestion des utilisateurs (CRUD)
+* Gestion des réservations
+* Gestion des paiements
+* Gestion des hôtels
+* Gestion des activités
+* Gestion des cours de surf
+* Gestion des restaurants
+* Gestion des avis
+* Gestion des événements
+* Gestion des notifications
+* Messagerie administrateur
+* Statistiques en temps réel
+
+---
+
+## 🎨 Design UI/UX
+
+Le design de Taghazout v2 a été conçu pour offrir une expérience utilisateur moderne, intuitive et agréable.
+
+### 🎯 Objectifs du Design
+
+* Simplifier la navigation.
+* Réduire le nombre de clics nécessaires.
+* Mettre en valeur les informations importantes.
+* Garantir une expérience utilisateur fluide.
+* Offrir une interface moderne et professionnelle.
+
+### 🎨 Palette de couleurs
+
+Le choix des couleurs a été inspiré par l'identité visuelle de la ville de Taghazout.
+
+| Couleur                 | Signification                         |
+| ----------------------- | ------------------------------------- |
+| 🔵 Bleu                 | Océan Atlantique, confiance, sérénité |
+| ⚪ Blanc                 | Clarté, simplicité, lisibilité        |
+| 🌊 Couleurs secondaires | Voyage, tourisme et surf              |
+
+Cette combinaison permet d'obtenir une interface harmonieuse et professionnelle.
+
+### 🏄 Logo
+
+Le logo du projet représente :
+
+* Le tourisme.
+* Le voyage.
+* Le surf.
+* L'identité de Taghazout.
+* La modernité de la plateforme.
+
+Son design minimaliste améliore sa visibilité et sa reconnaissance.
+
+### ☀️ Light Mode
+
+* Interface lumineuse.
+* Excellente lisibilité.
+* Aspect moderne et professionnel.
+
+### 🌙 Dark Mode
+
+* Réduction de la fatigue visuelle.
+* Confort accru en environnement sombre.
+* Expérience utilisateur améliorée.
+
+### 📱 Responsive Design
+
+Le site est entièrement responsive :
+
+* 💻 Ordinateurs
+* 📱 Smartphones
+* 📟 Tablettes
+
+L'interface s'adapte automatiquement à tous les écrans.
+
+### 🎨 Maquette Figma
+
+👉 https://www.figma.com/design/THQNT1UjzYcQwSPuRWNjWV/Untitled?node-id=0-1&m=dev&t=EnvAdKtgUx68xXrL-1
 
 ---
 
 ## 🛠️ Stack Technique
 
-| Technologie | Usage |
-|-------------|-------|
-| PHP 8.2 | Backend |
-| MariaDB 10.4 | Base de données |
-| Stripe API | Paiement en ligne |
-| Chart.js | Graphiques dashboard |
-| CSS3 / DM Sans / Syne | Design UI |
+| Technologie  | Usage                     |
+| ------------ | ------------------------- |
+| PHP 8.2      | Backend                   |
+| MariaDB 10.4 | Base de données           |
+| Stripe API   | Paiement en ligne         |
+| Chart.js     | Dashboard et statistiques |
+| CSS3         | Interface utilisateur     |
+| JavaScript   | Interactivité             |
+| DM Sans      | Typographie               |
+| Syne         | Titres                    |
 
 ---
 
 ## 📁 Structure du Projet
 
-```
+```text
 Taghazout_v2/
 ├── admin/
-│   ├── dashboard.php
-│   ├── users/
-│   ├── bookings/
-│   ├── payments/
-│   ├── hotels/
-│   ├── activities/
-│   ├── surf-courses/
-│   ├── restaurants/
-│   ├── reviews/
-│   └── messages/
 ├── auth/
-│   ├── login.php
-│   └── register.php
 ├── booking/
-│   └── my-bookings.php
 ├── payment/
-│   ├── checkout.php
-│   ├── payment-success.php
-│   └── payment-failed.php
 ├── includes/
-│   ├── config.php
-│   ├── navbar.php
-│   └── footer.php
 ├── assets/
-│   ├── css/
-│   │   ├── style.css
-│   │   └── admin.css
-│   └── js/
-│       └── main.js
 ├── database/
-│   ├── taghazout.sql
-│   └── taghazout_fixes.sql
 ├── diagrams/
-│   ├── MCD.png
-│   └── MLD.png
 ├── screenshots/
-│   ├── home.png
-│   ├── dashboard.png
-│   └── booking.png
 └── index.php
 ```
 
@@ -96,50 +166,65 @@ Taghazout_v2/
 
 ## 📸 Screenshots
 
-### Page d'accueil
+### 🏠 Page d'accueil
+
 ![Home](screenshots/home.png)
 
-### Dashboard Admin
+### 📊 Dashboard Administrateur
+
 ![Dashboard](screenshots/dashboard.png)
 
-### Réservation
+### 📅 Réservation
+
 ![Booking](screenshots/booking.png)
 
 ---
 
-## 🗄️ Base de données
+## 🗄️ Base de Données
 
-**Système :** MariaDB 10.4 / MySQL  
-**Nom de la BDD :** `taghazout`
+### Système
 
-### Tables principales
+* MariaDB 10.4
+* MySQL Compatible
 
-| Table | Description |
-|-------|-------------|
-| `users` | Utilisateurs (clients + admin) |
-| `hotels` | Hôtels disponibles |
-| `surf_courses` | Cours de surf |
-| `activities` | Activités (yoga, randonnée, sandboarding...) |
-| `restaurants` | Restaurants |
-| `bookings` | Réservations (hôtels, surf, activités) |
-| `payments` | Paiements (Stripe, PayPal, Cash) |
-| `reviews` | Avis et notes des utilisateurs |
-| `favorites` | Favoris des utilisateurs |
-| `messages` | Messagerie entre utilisateurs |
-| `notifications` | Notifications en temps réel |
-| `loyalty_rewards` | Récompenses du programme fidélité |
-| `loyalty_history` | Historique des points gagnés |
-| `loyalty_redemptions` | Échanges de points contre des récompenses |
-| `events` | Événements locaux |
-| `gallery` | Galerie photos |
-| `service_ia` | Services d'intelligence artificielle |
+### Nom de la Base
 
-### Diagrammes
+```sql
+taghazout
+```
 
-#### MCD — Modèle Conceptuel de Données
+### Tables Principales
+
+| Table               | Description                 |
+| ------------------- | --------------------------- |
+| users               | Gestion des utilisateurs    |
+| hotels              | Hôtels disponibles          |
+| surf_courses        | Cours de surf               |
+| activities          | Activités touristiques      |
+| restaurants         | Restaurants                 |
+| bookings            | Réservations                |
+| payments            | Paiements                   |
+| reviews             | Avis utilisateurs           |
+| favorites           | Favoris                     |
+| messages            | Messagerie                  |
+| notifications       | Notifications               |
+| loyalty_rewards     | Récompenses                 |
+| loyalty_history     | Historique fidélité         |
+| loyalty_redemptions | Utilisation des récompenses |
+| events              | Événements                  |
+| gallery             | Galerie                     |
+| service_ia          | Services IA                 |
+
+---
+
+## 📊 Diagrammes
+
+### MCD — Modèle Conceptuel de Données
+
 ![MCD](diagrams/MCD.png)
 
-#### MLD — Modèle Logique de Données
+### MLD — Modèle Logique de Données
+
 ![MLD](diagrams/MLD.png)
 
 ---
@@ -147,82 +232,116 @@ Taghazout_v2/
 ## 🚀 Installation
 
 ### Prérequis
-- PHP 8.2+
-- MariaDB 10.4+
-- Composer
-- Compte Stripe (pour les paiements)
 
-### Étapes
+* PHP 8.2+
+* MariaDB 10.4+
+* Composer
+* Compte Stripe
 
-**1. Cloner le projet**
+### 1️⃣ Cloner le projet
+
 ```bash
 git clone https://github.com/zakariyaaaaaa/Taghazout_v2.git
 cd Taghazout_v2
 ```
 
-**2. Installer les dépendances**
+### 2️⃣ Installer les dépendances
+
 ```bash
 composer install
 ```
 
-**3. Configurer la base de données**
+### 3️⃣ Importer la base de données
+
 ```bash
 mysql -u root -p taghazout < database/taghazout.sql
 ```
 
-**4. Configurer `includes/config.php`**
+### 4️⃣ Configurer la connexion
+
 ```php
 $pdo = new PDO(
     "mysql:host=localhost;dbname=taghazout;charset=utf8",
-    "root",      // votre username
-    ""           // votre password
+    "root",
+    ""
 );
 ```
 
-**5. Configurer les clés Stripe**
+### 5️⃣ Configurer Stripe
 
-Dans `payment/checkout.php` et `payment/payment-success.php` :
 ```php
-\Stripe\Stripe::setApiKey('sk_test_VOTRE_CLE_SECRETE');
+\Stripe\Stripe::setApiKey('sk_test_VOTRE_CLE');
 ```
 
-**6. Lancer le serveur**
+### 6️⃣ Lancer le projet
+
 ```bash
 php -S localhost:3000
 ```
 
-Ouvrir [http://localhost:3000](http://localhost:3000)
+Puis ouvrir :
+
+```text
+http://localhost:3000
+```
 
 ---
 
 ## 💳 Paiement Stripe
 
-Le projet utilise **Stripe Checkout** en mode test.
+Le projet utilise Stripe Checkout.
 
-Pour tester un paiement :
-- Numéro de carte : `4242 4242 4242 4242`
-- Date : n'importe quelle date future
-- CVC : n'importe quel code à 3 chiffres
+Carte de test :
+
+```text
+4242 4242 4242 4242
+```
+
+Date : Future
+
+CVC : 123
 
 ---
 
-## 👤 Compte Admin par défaut
+## 👤 Compte Administrateur
 
-| Champ | Valeur |
-|-------|--------|
-| Email | admin@taghazout.com |
-| Mot de passe | *(12345678)* |
+| Champ        | Valeur                                            |
+| ------------ | ------------------------------------------------- |
+| Email        | [admin@taghazout.com](mailto:admin@taghazout.com) |
+| Mot de passe | 12345678                                          |
+
+---
+
+## 📈 Perspectives d'Évolution
+
+Les prochaines versions pourront intégrer :
+
+* 📱 Application mobile Android/iOS
+* 🤖 Intelligence artificielle avancée
+* 📍 Géolocalisation en temps réel
+* 🌍 Support multilingue
+* 🎁 Programme fidélité avancé
+* 📊 Analyses statistiques avancées
+* 🗺️ Cartographie interactive
+* 💬 Chat en direct
 
 ---
 
 ## 📄 Licence
 
-MIT License — libre d'utilisation et de modification.
+MIT License
+
+Libre d'utilisation, de modification et de distribution.
 
 ---
 
 ## 👨‍💻 Auteur
 
-**Zakariya** — [GitHub](https://github.com/zakariyaaaaaa)
+**Zakariya**
 
-> Projet réalisé dans le cadre d'un apprentissage fullstack PHP/MariaDB avec intégration de paiement Stripe.
+GitHub :
+https://github.com/zakariyaaaaaa
+
+---
+
+> Projet réalisé dans le cadre d'un projet Full Stack PHP / MariaDB visant à moderniser la réservation touristique à Taghazout grâce à une plateforme web complète, responsive et sécurisée.
